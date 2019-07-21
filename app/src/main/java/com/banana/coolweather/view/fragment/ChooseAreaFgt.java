@@ -1,6 +1,7 @@
 package com.banana.coolweather.view.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import com.banana.coolweather.db.County;
 import com.banana.coolweather.db.Province;
 import com.banana.coolweather.util.HttpUtil;
 import com.banana.coolweather.util.Utility;
+import com.banana.coolweather.view.activity.WeatherActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.litepal.LitePal;
@@ -114,6 +116,13 @@ public class ChooseAreaFgt extends Fragment {
                     case LEVEL_CITY:
                         selectedCity = cityList.get(i);
                         queryCounties();
+                        break;
+                    case LEVEL_COUNTY:
+                        String weatherId=countyList.get(i).getWeatherId();
+                        Intent intent=new Intent(getActivity(), WeatherActivity.class);
+                        intent.putExtra("weather_id",weatherId);
+                        startActivity(intent);
+                        getActivity().finish();
                         break;
                 }
             }
